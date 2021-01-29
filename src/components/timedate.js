@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 class TimeDate extends Component {
-    
+
     constructor(props) {
         super(props);
         let day = new Date();
@@ -18,8 +18,8 @@ class TimeDate extends Component {
             1000);
 
     };
-    componentWillUnmount() { 
-        clearInterval(this.intervalID) 
+    componentWillUnmount() {
+        clearInterval(this.intervalID)
     };
     tick() {
         let day = new Date();

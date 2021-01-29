@@ -1,41 +1,61 @@
-import React, { useState } from 'react'
+
+import React, { useState, useEffect } from 'react'
 import img from './calm.png'
+
+// const express = require("express");
+// const app = express();
+
+//request api 
+
+
 
 const Body = () => {
 
-    const [quote, setQuote] = useState(genQuote());
+    const colorChange = () => {
+        let hue = 360 - Math.floor(Math.random() * 360); //gen hue between 0 and 360
+        let saturation = 100 - Math.floor(Math.random() * 80); //full saturation
+        let lightness = Math.floor(Math.random() * 75); //half lightness
+        //putting it all together
+        let hsl = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 
+        document.querySelector('#body').style.backgroundColor = hsl;
+
+    }
+
+    useEffect(() => {
+        colorChange();
+    })
+
+
+    const [quote, setQuote] = useState(genQuote)
 
     function genQuote() {
-
-        var quotes = [
-            'Every day and in every way I am getting better and better',
-            'I am abundantly joyful and happy',
-            'I am so grateful for my life',
-            'I find beauty and joy in ordinary things',
-            'My life is a joy. I relax easily and open myself up to delightful surprises',
-            'My life is a joy filled with love, fun and friendship',
-            'I choose love, joy and freedom, open my heart and allow wonderful things to flow into my life',
-            'I am free, and always have been. Experiences that made me feel like a victim were only experiences that appeared and disappeared in the arena of consciousness that I am',
-        ];
-        var randNum = Math.floor(Math.random() * 8);
-        var newQuote = quotes[randNum];
-        return newQuote
-    }
-
-    function refreshQuote(e) {
-        setQuote(genQuote)
+        fetch('https://dulce-affirmations-api.herokuapp.com/affirmation')
+            .then(response => {
+                return response.text()
+            }).then(data => {
+                let content = JSON.parse(data)
+                var affirm = content[0].phrase;
+                console.log(affirm)
+                document.querySelector('#quote').innerText = affirm
+            })
     }
 
 
+    const refreshQuote = () => setQuote(genQuote);
 
     return (
         <div className="container">
             <h1> You Matter </h1>
             <img id="smiley" src={img} alt="smiley" />
             <h3>Please remind yourself</h3>
-            <p id="quote">{quote}</p>
-            <button id="gen" onClick={refreshQuote}>More Positivity</button>
+            <div className="quote-container">
+                <p id="quote">{quote}</p>
+            </div>
+            <div className="button-wrapper">
+                <button id="gen" onClick={refreshQuote}>More Positivity</button>
+                <button id="color-change" onClick={colorChange}>Change Background</button>
+            </div>
         </div>
     )
 }

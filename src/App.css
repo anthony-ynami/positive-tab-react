@@ -1,3 +1,9 @@
+#body {
+  height: 100vh;
+  background-color: black;
+  transition: background .5s;
+}
+
 img {
   display: block;
   height: 40px;
@@ -35,7 +41,7 @@ body {
 #date {
   color: white;
   font-size: 1.3em;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: normal;
   letter-spacing: 0.2em;
   opacity: 0.6;
@@ -93,19 +99,28 @@ h1,
 h2,
 h3 {
   color: white;
-  font-family: "Helvetica", ;
+  font-family: "Quicksand", ;
+}
+
+.quote-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 p {
   max-width: 30em;
   color: white;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Quicksand", sans-serif;
   letter-spacing: 0.1em;
   text-align: center;
   margin: 40px auto;
   text-transform: capitalize;
   line-height: 145%;
   font-size: 2em;
+
+
+
 }
 
 p :hover {
@@ -149,10 +164,11 @@ p :hover {
   text-align: left;
 }
 
-#gen {
+button {
   bottom: 15%;
   outline: none;
   padding-top: 5px;
+  margin: 5px;
   text-decoration: none;
   opacity: 0.6;
   background-color: black;
@@ -165,20 +181,25 @@ p :hover {
   padding-bottom: 5px;
 }
 
-#gen:hover {
+button:hover {
   background-color: white;
   color: black;
   border: thin solid black;
   opacity: 0.8;
 }
 
-#gen a {
+button a {
   text-decoration: none;
 }
 
-#date {
-  color: white;
+.button-wrapper {
+  text-align: center;
+  display: inline-block;
+  position: fixed;
+  bottom: 5%;
+  transform: translate(-50%, -50%);
 }
+
 
 @media screen and (max-device-width: 800px) and (max-device-height: 640px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
   p {
